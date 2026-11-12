@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZORUVI | Account Created</title>
+  <meta name="description" content="ZORUVI: Account successfully created. Verify your email to start.">
+
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS Externos -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Diccionarios cargados de forma síncrona para evitar fallos de ámbito -->
+  <script src="i18n/en.js"></script>
+  <script src="i18n/es.js"></script>
+  <script src="i18n/pt.js"></script>
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/hi.js"></script>
+  <script src="i18n/pa.js"></script>
+
+  <!-- Script Único de Lógica -->
+  <script src="script.js" defer></script>
+</head>
+<body class="success-body">
+
+  <!-- NAVBAR SIMPLE -->
+  <header class="navbar success-navbar">
+    <div class="nav-container success-nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 500 500" width="34" height="34">
+          <polygon points="120,20 20,210 250,210" fill="#FF7043"></polygon>
+          <polygon points="380,20 480,210 250,210" fill="#FF7043"></polygon>
+          <polygon points="20,210 480,210 250,480" fill="#E0562D"></polygon>
+        </svg>
+        ZORUVI
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENIDO DE ÉXITO -->
+  <main class="success-main">
+    <div class="success-card">
+      
+      <!-- Icono de Éxito SVG Vectorial en Naranja Zoruvi -->
+      <div class="success-icon-box">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#E0562D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+
+      <h1 class="success-title" data-i18n="succ_title">Account Successfully Created!</h1>
+      
+      <p class="success-description">
+        <span data-i18n="succ_desc_1">We sent a verification link and instructions to</span> 
+        <strong id="userEmailPlaceholder" class="success-email-highlight">your email</strong>. 
+        <span data-i18n="succ_desc_2">Please check your inbox and verify your account within the next</span> 
+        <strong data-i18n="succ_desc_3">24 hours</strong>.
+      </p>
+
+      <div class="success-tip-box">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FF7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span data-i18n="succ_tip">Tip: If you don't see the email in your primary inbox, please check your spam or junk folder.</span>
+      </div>
+
+      <a href="index.html" class="btn btn-primary success-btn" data-i18n="succ_btn">
+        Return to Log In
+      </a>
+
+    </div>
+  </main>
+
+  <footer class="success-footer">
+    <p data-i18n="footer_text">&copy; 2026 ZORUVI.</p>
+  </footer>
+
+</body>
+</html>

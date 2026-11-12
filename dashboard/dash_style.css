@@ -1,0 +1,276 @@
+/* ==========================================================================
+   ZORUVI | DASHBOARD STYLES (dash_style.css)
+   ========================================================================== */
+
+:root {
+  --color-fox-primary: #E0562D;      
+  --color-fox-hover: #C6431C;        
+  --color-fox-light: #FFF2EE;        
+  --color-fox-dark: #1E2022;         
+  --color-fox-accent: #2C302E;       
+  
+  --color-bg-body: #FAFAFB;
+  --color-card-bg: #FFFFFF;
+  --color-card-hover: #D3D3D3;
+  --color-text-main: #18191B;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 20px -2px rgba(224, 86, 45, 0.08), 0 2px 6px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 20px 40px -15px rgba(30, 32, 34, 0.12);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-body);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   HEADER & NAVEGACIÓN DEL DASHBOARD
+   ========================================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--color-fox-dark);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-badge {
+  font-size: 0.75rem;
+  background-color: var(--color-fox-light);
+  color: var(--color-fox-primary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   BOTONES
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-outline {
+  background-color: var(--color-card-bg);
+  border-color: var(--color-border);
+  color: var(--color-text-main);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-card-hover);
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   CONTENIDO PRINCIPAL DEL DASHBOARD
+   ========================================================================== */
+.dashboard-body {
+  background-color: var(--color-bg-body);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.dashboard-welcome-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-fox-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-title .text-primary {
+  color: var(--color-fox-primary);
+}
+
+.dashboard-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.role-pill {
+  text-transform: uppercase;
+  background-color: var(--color-bg-body);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--color-fox-dark);
+  font-weight: 600;
+}
+
+.dashboard-section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-fox-dark);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.3rem;
+}
+
+.section-title span {
+  color: var(--color-fox-primary);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   GRID DE MÉTRICAS
+   ========================================================================== */
+.metrics-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.dashboard-metrics-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.5rem;
+}
+
+.metric-card {
+  background-color: var(--color-card-bg);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-fox-dark);
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-pill {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.status-pill.good { background-color: #10B981; }
+.status-pill.warn { background-color: #F59E0B; }
+
+/* ==========================================================================
+   FOOTER Y RESPONSIVIDAD
+   ========================================================================== */
+footer {
+  border-top: 1px solid var(--color-border);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  background-color: var(--color-card-bg);
+}
+
+@media (max-width: 1024px) {
+  .dashboard-metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dashboard-title {
+    font-size: 1.4rem;
+  }
+  .section-title {
+    font-size: 1.25rem !important;
+  }
+}

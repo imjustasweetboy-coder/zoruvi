@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZORUVI | Career Excellence Manager</title>
+  <meta name="description" content="ZORUVI: View all your performance metrics in one place. The ultimate platform to effortlessly achieve success in your operations career." />
+  
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS Externos -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Diccionarios cargados de forma síncrona para evitar fallos de ámbito -->
+  <script src="i18n/en.js"></script>
+  <script src="i18n/es.js"></script>
+  <script src="i18n/pt.js"></script>
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/hi.js"></script>
+  <script src="i18n/pa.js"></script>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Script Único de Lógica -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <svg viewBox="0 0 500 500">
+          <polygon points="120,20 20,210 250,210" fill="#FF7043" />
+          <polygon points="380,20 480,210 250,210" fill="#FF7043" />
+          <polygon points="20,210 480,210 250,480" fill="#E0562D" />
+        </svg>
+        ZORUVI
+      </a>
+      <div class="nav-actions">
+
+        <!-- SELECTOR DE IDIOMA (MUNDO + DROPDOWN) -->
+        <div class="lang-dropdown-container">
+          <button class="lang-trigger-btn" id="langTriggerBtn" onclick="toggleLangMenu(event)" aria-label="Select language">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </button>
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-option" id="opt-en" onclick="setLanguage('en')">English</button>
+            <button class="lang-option" id="opt-es" onclick="setLanguage('es')">Español</button>
+            <button class="lang-option" id="opt-pt" onclick="setLanguage('pt')">Português</button>
+            <button class="lang-option" id="opt-fr" onclick="setLanguage('fr')">Français</button>
+            <button class="lang-option" id="opt-hi" onclick="setLanguage('hi')">हिन्दी</button>
+            <button class="lang-option" id="opt-pa" onclick="setLanguage('pa')">ਪੰਜਾਬੀ</button>
+          </div>
+        </div>
+
+        <!-- BOTÓN DE AUTENTICACIÓN (ICONO PERSONA) -->
+        <button class="user-trigger-btn" id="userAuthBtn" onclick="openModal('login')" aria-label="Account" title="Log In / Register">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title" data-i18n="hero_title">Everything you need to excel, <span>in one single place</span>.</h1>
+      <p class="hero-description" data-i18n="hero_desc">
+        Achieve career success effortlessly. View all your key performance metrics in real time and take full control of your results.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" data-i18n="btn_start" onclick="openModal('register')">Get Started</button>
+        <a href="#features" class="btn btn-outline" data-i18n="btn_more">Learn More</a>
+      </div>
+    </div>
+
+    <!-- PREVIEW INTERACTIVA DINÁMICA -->
+    <div class="hero-preview">
+      <div class="preview-header">
+        <div class="preview-user">
+          <div class="avatar" id="previewAvatar">MG</div>
+          <div>
+            <strong style="display:block; font-size:0.95rem;" id="previewName">Marcus Gillespie</strong>
+            <span style="font-size:0.8rem; color:var(--color-text-muted);" id="previewRole">Operations Agent</span>
+          </div>
+        </div>
+        <span style="font-size:0.8rem; font-weight:600; color: var(--color-fox-primary);" data-i18n="preview_tag">Live Preview</span>
+      </div>
+
+      <!-- MÉTRICAS DINÁMICAS -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_aht">Average AHT</div>
+          <div class="metric-value" id="previewAht">342s <span class="status-pill good"></span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_qa">QA Score</div>
+          <div class="metric-value" id="previewQa">98.5% <span class="status-pill good"></span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_snps">SNPS</div>
+          <div class="metric-value" id="previewSnps">+72 <span class="status-pill good"></span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_adh">Adherence</div>
+          <div class="metric-value" id="previewAdh">91.0% <span class="status-pill warn"></span></div>
+        </div>
+      </div>
+
+      <!-- MINI GRÁFICO DE RENDIMIENTO / RADAR VISUAL -->
+      <div class="preview-chart-box">
+        <div class="chart-info">
+          <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted);">Squad Performance Trend</span>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #10B981;" id="previewTrend">+4.2% vs target</span>
+        </div>
+        <!-- Simulación visual de gráfico de barras / radar minimalista con CSS -->
+        <div class="mini-radar-bars">
+          <div class="bar-track"><div class="bar-fill" id="bar1" style="height: 85%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="bar2" style="height: 95%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="bar3" style="height: 70%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="bar4" style="height: 90%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="bar5" style="height: 88%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="bar6" style="height: 96%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- SECCIÓN DE CARACTERÍSTICAS TÉCNICAS / FUNCIONES CORE -->
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="feat_sec_title">Built for <span>Success</span>.</h2>
+      <p class="section-subtitle" data-i18n="feat_sec_sub">Everything we do under the hood to keep your operations running smoothly.</p>
+    </div>
+
+    <div class="carousel-container">
+      <!-- Capas de degradado para difuminar los lados -->
+      <div class="fade-left"></div>
+      <div class="fade-right"></div>
+
+      <!-- Pista que se mueve infinitamente -->
+      <div class="carousel-track">
+        <!-- Card 1: Real-Time Data (Icono de Rayo / Velocidad) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3 data-i18n="b1_title">Real-Time Data</h3>
+          <p data-i18n="b1_text">View all your key operational metrics instantly without delays.</p>
+        </div>
+
+        <!-- Card 2: Clear Goals (Icono de Diana / Objetivo) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2" fill="#E0562D"></circle>
+            </svg>
+          </div>
+          <h3 data-i18n="b2_title">Clear Goals</h3>
+          <p data-i18n="b2_text">Automated indicators guiding you step-by-step toward your targets.</p>
+        </div>
+
+        <!-- Card 3: 100% Secure (Icono de Candado) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="b3_title">100% Secure</h3>
+          <p data-i18n="b3_text">Your performance data is fully shielded and protected exclusively for you.</p>
+        </div>
+
+        <!-- Card 4: Ready Reports (Icono de Gráfica de Barras) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+              <line x1="2" y1="20" x2="22" y2="20"></line>
+            </svg>
+          </div>
+          <h3 data-i18n="b4_title">Ready Reports</h3>
+          <p data-i18n="b4_text">Forget about building manual spreadsheets; everything consolidates automatically.</p>
+        </div>
+
+        <!-- Tarjeta 5: Pay-as-You-Use Billing (Icono de Tarjeta de Crédito) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <h3 data-i18n="b5_title">Pay-as-You-Use Billing</h3>
+          <p data-i18n="b5_text">Dynamic licensing and active seat tracking tightly aligned to your team's growth.</p>
+        </div>
+
+        <!-- Tarjeta 6: Data Governance (Icono de Escudo de Seguridad) -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="b6_title">Data Governance</h3>
+          <p data-i18n="b6_text">Secure session management differentiating operational user roles.</p>
+        </div>
+
+        <!-- DUPLICAMOS LAS TARJETAS EXACTAS PARA LOGRAR EL EFECTO INFINITO -->
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3 data-i18n="b1_title">Real-Time Data</h3>
+          <p data-i18n="b1_text">View all your key operational metrics instantly without delays.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2" fill="#E0562D"></circle>
+            </svg>
+          </div>
+          <h3 data-i18n="b2_title">Clear Goals</h3>
+          <p data-i18n="b2_text">Automated indicators guiding you step-by-step toward your targets.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="b3_title">100% Secure</h3>
+          <p data-i18n="b3_text">Your performance data is fully shielded and protected exclusively for you.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+              <line x1="2" y1="20" x2="22" y2="20"></line>
+            </svg>
+          </div>
+          <h3 data-i18n="b4_title">Ready Reports</h3>
+          <p data-i18n="b4_text">Forget about building manual spreadsheets; everything consolidates automatically.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <h3 data-i18n="b5_title">Pay-as-You-Use Billing</h3>
+          <p data-i18n="b5_text">Dynamic licensing and active seat tracking tightly aligned to your team's growth.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E0562D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="b6_title">Data Governance</h3>
+          <p data-i18n="b6_text">Secure session management differentiating operational user roles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PRECIOS Y PLANES -->
+  <section class="pricing" id="pricing">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="pricing_title">Choose <span>Your</span> Plan</h2>
+      <p class="section-subtitle" data-i18n="pricing_sub">No surprise fees. Pay as your teams grow.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- PLAN AGENT -->
+      <div class="pricing-card">
+        <h3 class="plan-name" data-i18n="plan_agent_title">Agent</h3>
+        <div class="plan-price">$0</div>
+        <p class="plan-desc" data-i18n="plan_agent_desc">For individual agents driving their personal performance.</p>
+        <ul class="plan-features">
+          <li data-i18n="plan_agent_f1">✓ 1 User Seat</li>
+          <li data-i18n="plan_agent_f2">✓ Personal Performance Dashboard</li>
+          <li data-i18n="plan_agent_f3">✓ Real-Time Metrics (AHT, QA, Adherence)</li>
+          <li data-i18n="plan_agent_f4">✓ 30-Day Historical Data</li>
+        </ul>
+        <button class="btn btn-outline" data-i18n="btn_agent" onclick="openModal('register')">Get Started Now</button>
+      </div>
+
+      <!-- PLAN TEAM -->
+      <div class="pricing-card featured">
+        <div class="badge" data-i18n="badge_team">Suggested</div>
+        <h3 class="plan-name" data-i18n="plan_team_title">Team</h3>
+        <div class="plan-price" id="price-team">$6<span class="price-suffix" data-i18n="price_suffix_user">/user</span></div>
+        <p class="plan-desc" data-i18n="plan_team_desc">For supervisors & team leaders managing 1 squad (up to 30 agents).</p>
+        <ul class="plan-features">
+          <li data-i18n="plan_team_f1">✓ Up to 30 User Seats (1 Flexible Squad)</li>
+          <li data-i18n="plan_team_f2">✓ Team Supervisor Dashboard</li>
+          <li data-i18n="plan_team_f3">✓ Automatic Visual Threshold Alerts</li>
+          <li data-i18n="plan_team_f4">✓ Full Historical Performance Log</li>
+          <li data-i18n="plan_team_f5">✓ Pay-as-you-use Seat Billing</li>
+        </ul>
+        <button class="btn btn-primary" data-i18n="btn_team" onclick="openModal('register')">Start Free Trial</button>
+      </div>
+
+      <!-- PLAN BUSINESS -->
+      <div class="pricing-card">
+        <h3 class="plan-name" data-i18n="plan_business_title">Business</h3>
+        <div class="plan-price" id="price-business">$8<span class="price-suffix" data-i18n="price_suffix_user">/user</span></div>
+        <p class="plan-desc" data-i18n="plan_business_desc">For operations managers running multiple squads & campaigns.</p>
+        <ul class="plan-features">
+          <li data-i18n="plan_business_f1">✓ Up to 300 User Seats (10 Flexible Squads)</li>
+          <li data-i18n="plan_business_f2">✓ Multi-Level Governance & Roles</li>
+          <li data-i18n="plan_business_f3">✓ Cross-Squad Comparative Reports</li>
+          <li data-i18n="plan_business_f4">✓ Dynamic Inbound Webhooks</li>
+          <li data-i18n="plan_business_f5">✓ Priority Support</li>
+        </ul>
+        <button class="btn btn-outline" data-i18n="btn_business" onclick="openModal('register')">Scale Your Business</button>
+      </div>
+    </div>
+  </section>
+
+<!-- MODAL DE AUTENTICACIÓN -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Log In</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Sign Up</button>
+      </div>
+
+      <form id="authForm" onsubmit="handleAuth(event)">
+        <!-- Campos exclusivos para Registro -->
+        <div class="form-group register-only" id="nameGroup" style="display: none;">
+          <label class="form-label" for="fullName">Full Name</label>
+          <input type="text" id="fullName" class="form-input" placeholder="Marcus Gillespie">
+        </div>
+        
+        <div class="form-group register-only" id="usernameGroup" style="display: none;">
+          <label class="form-label" for="username">Username</label>
+          <input type="text" id="username" class="form-input" placeholder="mgillespie" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" id="emailLabel" for="email">Email or Username</label>
+          <input type="text" id="email" class="form-input" placeholder="tu@zoruvi.com o usuario" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="password" class="form-input" placeholder="••••••••" style="width: 100%; padding-right: 45px;" required>
+            <button type="button" id="toggleLoginPassword" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #FF7043; display: flex; align-items: center;" title="Show/Hide Password">
+              <!-- SVG Ojo Abierto (Naranja Principal Zoruvi) -->
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FF7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Confirmación de contraseña solo para registro -->
+        <div class="form-group register-only" id="confirmPasswordGroup" style="display: none;">
+          <label class="form-label" for="confirmPassword">Confirm Password</label>
+          <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" style="width: 100%; padding-right: 45px;">
+            <button type="button" id="toggleRegisterPassword" onclick="togglePasswordVisibility('confirmPassword', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #FF7043; display: flex; align-items: center;" title="Show/Hide Password">
+              <!-- SVG Ojo Abierto (Naranja Secundario) -->
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FF7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" id="roleGroup" style="display: none;">
+          <label class="form-label" for="role">User Role</label>
+          <select id="role" class="form-input">
+            <option value="agent">Agent</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="authSubmitBtn">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p data-i18n="footer_text">&copy; 2026 ZORUVI.</p>
+  </footer>
+
+</body>
+</html>
