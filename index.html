@@ -93,7 +93,7 @@
           <div class="avatar" id="previewAvatar">MG</div>
           <div>
             <strong style="display:block; font-size:0.95rem;" id="previewName">Marcus Gillespie</strong>
-            <span style="font-size:0.8rem; color:var(--color-text-muted);" id="previewRole">Operations Agent</span>
+            <span style="font-size:0.8rem; color:var(--color-text-muted);" id="previewRole" data-i18n="preview_role_default">Operations Agent</span>
           </div>
         </div>
         <span style="font-size:0.8rem; font-weight:600; color: var(--color-fox-primary);" data-i18n="preview_tag">Live Preview</span>
@@ -122,8 +122,8 @@
       <!-- MINI GRÁFICO DE RENDIMIENTO / RADAR VISUAL -->
       <div class="preview-chart-box">
         <div class="chart-info">
-          <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted);">Squad Performance Trend</span>
-          <span style="font-size: 0.8rem; font-weight: 700; color: #10B981;" id="previewTrend">+4.2% vs target</span>
+          <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted);" data-i18n="chart_squad_trend">Squad Performance Trend</span>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #10B981;" id="previewTrend" data-i18n="chart_trend_val">+4.2% vs target</span>
         </div>
         <!-- Simulación visual de gráfico de barras / radar minimalista con CSS -->
         <div class="mini-radar-bars">
@@ -351,29 +351,29 @@
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">&times;</button>
       <div class="auth-tabs">
-        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Log In</button>
-        <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Sign Up</button>
+        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')" data-i18n="tab_login">Log In</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchTab('register')" data-i18n="tab_register">Sign Up</button>
       </div>
 
       <form id="authForm" onsubmit="handleAuth(event)">
         <!-- Campos exclusivos para Registro -->
         <div class="form-group register-only" id="nameGroup" style="display: none;">
-          <label class="form-label" for="fullName">Full Name</label>
+          <label class="form-label" for="fullName" data-i18n="label_fullname">Full Name</label>
           <input type="text" id="fullName" class="form-input" placeholder="Marcus Gillespie">
         </div>
         
         <div class="form-group register-only" id="usernameGroup" style="display: none;">
-          <label class="form-label" for="username">Username</label>
+          <label class="form-label" for="username" data-i18n="label_username">Username</label>
           <input type="text" id="username" class="form-input" placeholder="mgillespie" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label" id="emailLabel" for="email">Email or Username</label>
+          <label class="form-label" id="emailLabel" for="email" data-i18n="label_email_or_user">Email or Username</label>
           <input type="text" id="email" class="form-input" placeholder="tu@zoruvi.com o usuario" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">Password</label>
+          <label class="form-label" for="password" data-i18n="label_password">Password</label>
           <div style="position: relative; display: flex; align-items: center;">
             <input type="password" id="password" class="form-input" placeholder="••••••••" style="width: 100%; padding-right: 45px;" required>
             <button type="button" id="toggleLoginPassword" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #FF7043; display: flex; align-items: center;" title="Show/Hide Password">
@@ -388,7 +388,7 @@
 
         <!-- Confirmación de contraseña solo para registro -->
         <div class="form-group register-only" id="confirmPasswordGroup" style="display: none;">
-          <label class="form-label" for="confirmPassword">Confirm Password</label>
+          <label class="form-label" for="confirmPassword" data-i18n="label_confirm_password">Confirm Password</label>
           <div style="position: relative; display: flex; align-items: center;">
             <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" style="width: 100%; padding-right: 45px;">
             <button type="button" id="toggleRegisterPassword" onclick="togglePasswordVisibility('confirmPassword', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #FF7043; display: flex; align-items: center;" title="Show/Hide Password">
@@ -402,15 +402,15 @@
         </div>
 
         <div class="form-group" id="roleGroup" style="display: none;">
-          <label class="form-label" for="role">User Role</label>
+          <label class="form-label" for="role" data-i18n="label_user_role">User Role</label>
           <select id="role" class="form-input">
-            <option value="agent">Agent</option>
-            <option value="supervisor">Supervisor</option>
-            <option value="admin">Administrator</option>
+            <option value="agent" data-i18n="role_agent">Agent</option>
+            <option value="supervisor" data-i18n="role_supervisor">Supervisor</option>
+            <option value="admin" data-i18n="role_admin">Administrator</option>
           </select>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="authSubmitBtn">Log In</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="authSubmitBtn" data-i18n="tab_login">Log In</button>
       </form>
     </div>
   </div>

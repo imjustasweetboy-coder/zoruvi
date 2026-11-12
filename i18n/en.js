@@ -1,16 +1,17 @@
-window.i18n_en = {
-  // Hero & Navbar
+window.i18n = window.i18n || {};
+window.i18n.en = {
   hero_title: "Everything you need to excel, <span>in one single place</span>.",
   hero_desc: "Achieve career success effortlessly. View all your key performance metrics in real time and take full control of your results.",
   btn_start: "Get Started",
   btn_more: "Learn More",
+  preview_role_default: "Operations Agent",
   preview_tag: "Live Preview",
   metric_aht: "Average AHT",
   metric_qa: "QA Score",
   metric_snps: "SNPS",
   metric_adh: "Adherence",
-
-  // Features
+  chart_squad_trend: "Squad Performance Trend",
+  chart_trend_val: "+4.2% vs target",
   feat_sec_title: "Built for <span>Success</span>.",
   feat_sec_sub: "Everything we do under the hood to keep your operations running smoothly.",
   b1_title: "Real-Time Data",
@@ -25,12 +26,8 @@ window.i18n_en = {
   b5_text: "Dynamic licensing and active seat tracking tightly aligned to your team's growth.",
   b6_title: "Data Governance",
   b6_text: "Secure session management differentiating operational user roles.",
-
-  // Pricing
   pricing_title: "Choose <span>Your</span> Plan",
   pricing_sub: "No surprise fees. Pay as your teams grow.",
-  price_suffix_user: "/user",
-  badge_team: "Suggested",
   plan_agent_title: "Agent",
   plan_agent_desc: "For individual agents driving their personal performance.",
   plan_agent_f1: "✓ 1 User Seat",
@@ -38,7 +35,9 @@ window.i18n_en = {
   plan_agent_f3: "✓ Real-Time Metrics (AHT, QA, Adherence)",
   plan_agent_f4: "✓ 30-Day Historical Data",
   btn_agent: "Get Started Now",
+  badge_team: "Suggested",
   plan_team_title: "Team",
+  price_suffix_user: "/user",
   plan_team_desc: "For supervisors & team leaders managing 1 squad (up to 30 agents).",
   plan_team_f1: "✓ Up to 30 User Seats (1 Flexible Squad)",
   plan_team_f2: "✓ Team Supervisor Dashboard",
@@ -54,35 +53,33 @@ window.i18n_en = {
   plan_business_f4: "✓ Dynamic Inbound Webhooks",
   plan_business_f5: "✓ Priority Support",
   btn_business: "Scale Your Business",
-
-  // Auth Modal & Validation
   tab_login: "Log In",
   tab_register: "Sign Up",
-  lbl_fullname: "Full Name",
-  lbl_username: "Username",
-  lbl_email: "Email Address",
+  label_fullname: "Full Name",
+  label_username: "Username",
+  label_email_or_user: "Email or Username",
   lbl_email_user: "Email or Username",
   ph_email_user: "you@zoruvi.com or username",
-  lbl_password: "Password",
-  lbl_confirm_pass: "Confirm Password",
-  lbl_role: "User Role",
+  lbl_email: "Email Address",
+  label_password: "Password",
+  label_confirm_password: "Confirm Password",
+  label_user_role: "User Role",
   role_agent: "Agent",
-  role_sup: "Supervisor",
+  role_supervisor: "Supervisor",
   role_admin: "Administrator",
-  err_user_not_found: "User not found or missing associated email.",
-  err_invalid_creds: "Invalid credentials. Please check your password.",
-  err_pass_mismatch: "Passwords do not match.",
-  err_pass_weak: "Min 8 characters, one uppercase, one number, and one symbol.",
-  err_email_exists: "This email is already registered.",
-  err_pass_sec: "Password does not meet security requirements.",
-
-  // Success Page
+  footer_text: "&copy; 2026 ZORUVI.",
   succ_title: "Account Successfully Created!",
   succ_desc_1: "We sent a verification link and instructions to",
   succ_desc_2: "Please check your inbox and verify your account within the next",
   succ_desc_3: "24 hours",
   succ_tip: "Tip: If you don't see the email in your primary inbox, please check your spam or junk folder.",
   succ_btn: "Return to Log In",
-
-  footer_text: "&copy; 2026 ZORUVI."
+  err_user_not_found: "User not found or missing associated email.",
+  err_invalid_creds: "Invalid credentials. Please check your password.",
+  err_pass_mismatch: "Passwords do not match.",
+  err_pass_weak: "Min 8 characters, one uppercase, one number, and one symbol.",
+  err_email_exists: "This email is already registered.",
+  err_pass_sec: "Password does not meet security requirements."
 };
+
+window.i18n_en = window.i18n.en;
