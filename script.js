@@ -119,7 +119,6 @@ window.switchTab = function(mode) {
   const emailInput = document.getElementById('email');
   const translations = dictionaries[currentLang] || dictionaries['en'];
 
-  // Limpiar errores visuales al cambiar de pestaña
   clearFormErrors();
   
   if (mode === 'login') {
@@ -141,12 +140,10 @@ window.switchTab = function(mode) {
   }
 };
 
-// Función auxiliar para marcar un campo con error y descripción
 function setFieldError(inputElement, message) {
   if (!inputElement) return;
   inputElement.style.borderColor = 'var(--color-fox-primary, #E0562D)';
   
-  // Buscar si ya tiene un mensaje de error adyacente para no duplicarlo
   let errorDesc = inputElement.parentNode.querySelector('.field-error-msg');
   if (!errorDesc) {
     errorDesc = document.createElement('span');
@@ -160,7 +157,6 @@ function setFieldError(inputElement, message) {
   errorDesc.innerText = message;
 }
 
-// Función auxiliar para limpiar estados de error en formularios
 function clearFormErrors() {
   document.querySelectorAll('.form-input').forEach(input => {
     input.style.borderColor = '';
@@ -195,9 +191,9 @@ window.handleAuth = async function(event) {
         if (fullError || !fullProfile || !fullProfile.email) {
           setFieldError(
             document.getElementById('email'), 
-            translations['err_user_not_found'] || 'User not found or missing associated email.'
+            translations['err_user_not_found'] || 'No hay coincidencias con este usuario o no existe.'
           );
-          throw new Error("Username not found or missing email mapping.");
+          return;
         }
         resolvedEmail = fullProfile.email;
       }
@@ -207,18 +203,23 @@ window.handleAuth = async function(event) {
         password: password,
       });
 
-      if (error) throw error;
-      window.location.href = 'dashboard/dashboard.html';
-    } catch (err) {
-      if (err.message.includes('Invalid login credentials')) {
+      if (error) {
         setFieldError(
           document.getElementById('password'), 
-          translations['err_invalid_creds'] || 'Invalid credentials. Please check your password.'
+          translations['err_invalid_creds'] || 'No hay coincidencias o la contraseña es incorrecta.'
         );
+        return;
       }
+
+      window.location.href = 'dashboard/dashboard.html';
+    } catch (err) {
+      console.error("Error en el login:", err);
+      setFieldError(
+        document.getElementById('email'), 
+        translations['err_general_login'] || 'Ocurrió un error al iniciar sesión. Verifica tus datos.'
+      );
     }
   } else {
-    // Validaciones de Registro
     const fullNameInput = document.getElementById('fullName');
     const usernameInput = document.getElementById('username');
     const emailInput = document.getElementById('email');
@@ -232,7 +233,6 @@ window.handleAuth = async function(event) {
 
     let hasError = false;
 
-    // 1. Validar coincidencia de contraseñas
     if (password !== confirmPassword) {
       setFieldError(
         confirmPasswordInput, 
@@ -241,7 +241,6 @@ window.handleAuth = async function(event) {
       hasError = true;
     }
 
-    // 2. Validar seguridad de la contraseña (8 dígitos, mayúscula, número, carácter especial)
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     if (!passwordRegex.test(password)) {
       setFieldError(
@@ -269,7 +268,6 @@ window.handleAuth = async function(event) {
 
       if (error) throw error;
 
-      // Redirección exitosa a success.html enviando el email por parámetro
       window.location.href = `success.html?email=${encodeURIComponent(identifier)}`;
       
     } catch (err) {
@@ -381,7 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Recoger el email de la URL si se encuentra en success.html
   const urlParams = new URLSearchParams(window.location.search);
   const userEmail = urlParams.get('email');
   if (userEmail) {
