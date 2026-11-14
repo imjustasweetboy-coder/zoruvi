@@ -321,7 +321,7 @@ window.handleRegister = async function(event) {
     }
 
     // Redirigir a success.html en la raíz
-    window.location.href = `../success.html?email=${encodeURIComponent(email)}`;
+    window.location.href = `success.html?email=${encodeURIComponent(email)}`;
 
   } catch (err) {
     console.error("Error en el registro:", err);
