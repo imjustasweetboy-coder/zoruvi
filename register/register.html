@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZORUVI | Create Account</title>
+  <meta name="description" content="Join ZORUVI and take full control of your operations career." />
+  
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS Independientes -->
+  <link rel="stylesheet" href="register.css">
+
+  <!-- Diccionarios i18n -->
+  <script src="../i18n/en.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/pt.js"></script>
+  <script src="../i18n/fr.js"></script>
+  <script src="../i18n/hi.js"></script>
+  <script src="../i18n/pa.js"></script>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Assets Globales y Lógica Independiente -->
+  <script src="../assets/icons.js" defer></script>
+  <script src="register.js" defer></script>
+</head>
+<body class="register-body">
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo">
+        <svg class="icon"><use href="#icon-logo"></use></svg>
+        ZORUVI
+      </a>
+      <div class="nav-actions">
+        <!-- SELECTOR DE IDIOMA -->
+        <div class="lang-dropdown-container">
+          <button class="lang-trigger-btn" id="langTriggerBtn" onclick="toggleLangMenu(event)" aria-label="Select language">
+            <svg class="icon"><use href="#icon-globe"></use></svg>
+          </button>
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-option" id="opt-en" onclick="setLanguage('en')">English</button>
+            <button class="lang-option" id="opt-es" onclick="setLanguage('es')">Español</button>
+            <button class="lang-option" id="opt-pt" onclick="setLanguage('pt')">Português</button>
+            <button class="lang-option" id="opt-fr" onclick="setLanguage('fr')">Français</button>
+            <button class="lang-option" id="opt-hi" onclick="setLanguage('hi')">हिन्दी</button>
+            <button class="lang-option" id="opt-pa" onclick="setLanguage('pa')">ਪੰਜਾਬੀ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DE REGISTRO -->
+  <main class="register-main">
+    <div class="register-card">
+      <div class="auth-header">
+        <h3 data-i18n="tab_register">Create Account</h3>
+        <p class="auth-subtitle" data-i18n="reg_subtitle">Start tracking your career excellence today.</p>
+      </div>
+
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        
+        <!-- USERNAME -->
+        <div class="form-group">
+          <label class="form-label" for="regUsername" data-i18n="lbl_username">Username</label>
+          <input type="text" id="regUsername" class="form-input" placeholder="e.g. marquinno" required>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label class="form-label" for="regEmail" data-i18n="lbl_email">Email Address</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="you@zoruvi.com" required>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group password-group-container">
+          <label class="form-label" for="regPassword" data-i18n="label_password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required>
+            <button type="button" onclick="togglePasswordVisibility('regPassword', this)" aria-label="Toggle password visibility">
+              <svg class="icon-eye"><use href="#icon-eye"></use></svg>
+            </button>
+          </div>
+          
+          <!-- CAJITA FLOTANTE DE REQUISITOS (Se activa al enfocar el input) -->
+          <div class="password-requirements-box" id="passwordRequirements">
+            <ul>
+              <li id="req-length">At least 8 characters</li>
+              <li id="req-upper">One uppercase letter</li>
+              <li id="req-number">One number</li>
+              <li id="req-special">One special character (!@#$%^&*)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="form-group">
+          <label class="form-label" for="regConfirmPassword" data-i18n="lbl_confirm_pass">Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••" required>
+            <button type="button" onclick="togglePasswordVisibility('regConfirmPassword', this)" aria-label="Toggle password visibility">
+              <svg class="icon-eye"><use href="#icon-eye"></use></svg>
+            </button>
+          </div>
+          <!-- NOTA DE QUE LAS CONTRASEÑAS NO COINCIDEN -->
+          <span class="password-mismatch-msg" id="passwordMismatchMsg">Passwords do not match.</span>
+        </div>
+
+        <!-- COUNTRY SELECTOR CON AUTOCOMPLETADO (Anticonejolandias) -->
+        <div class="form-group custom-select-wrapper">
+          <label class="form-label" for="regCountry">Country</label>
+          <input type="text" id="regCountry" class="form-input" placeholder="Select or type your country..." autocomplete="off" required>
+          <div class="custom-options-container" id="countryOptionsContainer"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="registerSubmitBtn" data-i18n="tab_register">Create Account</button>
+      </form>
+
+      <div class="auth-footer-link">
+        <span data-i18n="lbl_have_account">Already have an account?</span> 
+        <a href="../index.html" data-i18n="tab_login">Log In</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-i18n="footer_text">&copy; 2026 ZORUVI.</p>
+  </footer>
+
+</body>
+</html>

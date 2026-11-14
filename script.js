@@ -1,5 +1,5 @@
 // ==========================================================================
-// CONFIGURACIÓN DE SUPABASE
+// CONFIGURACIÓN DE SUPABASE Y ESTADO GLOBAL
 // ==========================================================================
 const SUPABASE_URL = 'https://odrcgxwgbltinaudplao.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_omwz5S3thHuN2-fzry4QSg_3d0KcpIS';
@@ -16,7 +16,6 @@ try {
 let currentLang = localStorage.getItem('zoruvi_lang') || 'en';
 let currentMode = 'login';
 
-// Diccionario seguro integrado
 const dictionaries = {
   en: window.i18n_en || { tab_login: "Log In", tab_register: "Sign Up" },
   es: window.i18n_es || { tab_login: "Iniciar Sesión", tab_register: "Registrarse" },
@@ -59,240 +58,7 @@ window.toggleLangMenu = function(e) {
 };
 
 // ==========================================================================
-// 2. UTILIDAD: MOSTRAR / OCULTAR CONTRASEÑA INDEPENDIENTE (CON SVGs)
-// ==========================================================================
-window.togglePasswordVisibility = function(fieldId, btnElement) {
-  const passwordInput = document.getElementById(fieldId);
-  if (!passwordInput) return;
-
-  const svgElement = btnElement.querySelector('svg');
-  const iconColor = '#FF7043';
-
-  if (passwordInput.type === 'password') {
-    passwordInput.type = 'text';
-    if (svgElement) {
-      svgElement.innerHTML = `
-        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="${iconColor}"></path>
-        <line x1="1" y1="1" x2="23" y2="23" stroke="${iconColor}"></line>
-      `;
-    }
-  } else {
-    passwordInput.type = 'password';
-    if (svgElement) {
-      svgElement.innerHTML = `
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="${iconColor}"></path>
-        <circle cx="12" cy="12" r="3" stroke="${iconColor}"></circle>
-      `;
-    }
-  }
-};
-
-// ==========================================================================
-// 3. MODALES Y AUTENTICACIÓN
-// ==========================================================================
-window.openModal = function(mode = 'login') {
-  currentMode = mode;
-  const modal = document.getElementById('authModal');
-  if (modal) {
-    modal.classList.add('active');
-    modal.style.display = 'flex';
-    window.switchTab(mode);
-  }
-};
-
-window.closeModal = function() {
-  const modal = document.getElementById('authModal');
-  if (modal) {
-    modal.classList.remove('active');
-    modal.style.display = 'none';
-  }
-};
-
-window.switchTab = function(mode) {
-  currentMode = mode;
-  const tabLogin = document.getElementById('tabLogin');
-  const tabRegister = document.getElementById('tabRegister');
-  const roleGroup = document.getElementById('roleGroup');
-  const registerOnlyElements = document.querySelectorAll('.register-only');
-  const authSubmitBtn = document.getElementById('authSubmitBtn');
-  const emailLabel = document.getElementById('emailLabel');
-  const emailInput = document.getElementById('email');
-  const translations = dictionaries[currentLang] || dictionaries['en'];
-
-  // Limpiar errores visuales al cambiar de pestaña
-  clearFormErrors();
-  
-  if (mode === 'login') {
-    if (tabLogin) tabLogin.classList.add('active');
-    if (tabRegister) tabRegister.classList.remove('active');
-    if (roleGroup) roleGroup.style.display = 'none';
-    registerOnlyElements.forEach(el => el.style.display = 'none');
-    if (emailLabel) emailLabel.innerText = translations['lbl_email_user'] || 'Email or Username';
-    if (emailInput) emailInput.placeholder = translations['ph_email_user'] || 'you@zoruvi.com or username';
-    if (authSubmitBtn) authSubmitBtn.innerText = translations['tab_login'] || 'Log In';
-  } else {
-    if (tabRegister) tabRegister.classList.add('active');
-    if (tabLogin) tabLogin.classList.remove('active');
-    if (roleGroup) roleGroup.style.display = 'block';
-    registerOnlyElements.forEach(el => el.style.display = 'block');
-    if (emailLabel) emailLabel.innerText = translations['lbl_email'] || 'Email Address';
-    if (emailInput) emailInput.placeholder = 'you@zoruvi.com';
-    if (authSubmitBtn) authSubmitBtn.innerText = translations['tab_register'] || 'Sign Up';
-  }
-};
-
-// Función auxiliar para marcar un campo con error y descripción
-function setFieldError(inputElement, message) {
-  if (!inputElement) return;
-  inputElement.style.borderColor = 'var(--color-fox-primary, #E0562D)';
-  
-  // Buscar si ya tiene un mensaje de error adyacente para no duplicarlo
-  let errorDesc = inputElement.parentNode.querySelector('.field-error-msg');
-  if (!errorDesc) {
-    errorDesc = document.createElement('span');
-    errorDesc.className = 'field-error-msg';
-    errorDesc.style.color = 'var(--color-fox-primary, #E0562D)';
-    errorDesc.style.fontSize = '0.75rem';
-    errorDesc.style.marginTop = '0.25rem';
-    errorDesc.style.display = 'block';
-    inputElement.parentNode.appendChild(errorDesc);
-  }
-  errorDesc.innerText = message;
-}
-
-// Función auxiliar para limpiar estados de error en formularios
-function clearFormErrors() {
-  document.querySelectorAll('.form-input').forEach(input => {
-    input.style.borderColor = '';
-  });
-  document.querySelectorAll('.field-error-msg').forEach(msg => msg.remove());
-}
-
-window.handleAuth = async function(event) {
-  event.preventDefault();
-  clearFormErrors();
-  
-  if (!supabaseClient) {
-    alert("Supabase client not initialized.");
-    return;
-  }
-
-  const translations = dictionaries[currentLang] || dictionaries['en'];
-  const identifier = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-
-  if (currentMode === 'login') {
-    try {
-      let resolvedEmail = identifier;
-
-      if (!identifier.includes('@')) {
-        const { data: fullProfile, error: fullError } = await supabaseClient
-          .from('profiles')
-          .select('*')
-          .eq('username', identifier)
-          .single();
-
-        if (fullError || !fullProfile || !fullProfile.email) {
-          setFieldError(
-            document.getElementById('email'), 
-            translations['err_user_not_found'] || 'User not found or missing associated email.'
-          );
-          throw new Error("Username not found or missing email mapping.");
-        }
-        resolvedEmail = fullProfile.email;
-      }
-
-      const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: resolvedEmail,
-        password: password,
-      });
-
-      if (error) throw error;
-      window.location.href = 'dashboard/dashboard.html';
-    } catch (err) {
-      if (err.message.includes('Invalid login credentials')) {
-        setFieldError(
-          document.getElementById('password'), 
-          translations['err_invalid_creds'] || 'Invalid credentials. Please check your password.'
-        );
-      }
-    }
-  } else {
-    // Validaciones de Registro
-    const fullNameInput = document.getElementById('fullName');
-    const usernameInput = document.getElementById('username');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    
-    const fullName = fullNameInput.value.trim();
-    const username = usernameInput.value.trim();
-    const confirmPassword = confirmPasswordInput.value;
-    const role = document.getElementById('role').value;
-
-    let hasError = false;
-
-    // 1. Validar coincidencia de contraseñas
-    if (password !== confirmPassword) {
-      setFieldError(
-        confirmPasswordInput, 
-        translations['err_pass_mismatch'] || 'Passwords do not match.'
-      );
-      hasError = true;
-    }
-
-    // 2. Validar seguridad de la contraseña (8 dígitos, mayúscula, número, carácter especial)
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      setFieldError(
-        passwordInput, 
-        translations['err_pass_weak'] || 'Min 8 characters, one uppercase, one number, and one symbol.'
-      );
-      hasError = true;
-    }
-
-    if (hasError) return;
-
-    try {
-      const { data, error } = await supabaseClient.auth.signUp({
-        email: identifier,
-        password: password,
-        options: {
-          data: {
-            full_name: fullName,
-            username: username,
-            role: role,
-            email: identifier
-          }
-        }
-      });
-
-      if (error) throw error;
-
-      // Redirección exitosa a success.html enviando el email por parámetro
-      window.location.href = `success.html?email=${encodeURIComponent(identifier)}`;
-      
-    } catch (err) {
-      let msg = err.message.toLowerCase();
-      if (msg.includes('email') || msg.includes('already registered')) {
-        setFieldError(
-          emailInput, 
-          translations['err_email_exists'] || 'This email is already registered.'
-        );
-      } else if (msg.includes('password')) {
-        setFieldError(
-          passwordInput, 
-          translations['err_pass_sec'] || 'Password does not meet security requirements.'
-        );
-      } else {
-        alert(`Registration Error: ${err.message}`);
-      }
-    }
-  }
-};
-
-// ==========================================================================
-// 4. ROTADOR DINÁMICO DE PERFILES (PREVIEW)
+// 2. ROTADOR DINÁMICO DE PERFILES (LIVE PREVIEW)
 // ==========================================================================
 const mockProfiles = [
   {
@@ -333,23 +99,29 @@ function rotatePreviewProfile() {
     currentProfileIndex = (currentProfileIndex + 1) % mockProfiles.length;
     const p = mockProfiles[currentProfileIndex];
 
-    const avatarEl = document.getElementById('previewAvatar');
-    const nameEl = document.getElementById('previewName');
-    const roleEl = document.getElementById('previewRole');
-    const ahtEl = document.getElementById('previewAht');
-    const qaEl = document.getElementById('previewQa');
-    const snpsEl = document.getElementById('previewSnps');
-    const adhEl = document.getElementById('previewAdh');
-    const trendEl = document.getElementById('previewTrend');
+    const elements = {
+      previewAvatar: p.initials,
+      previewName: p.name,
+      previewRole: p.role,
+      previewTrend: p.trend
+    };
 
-    if (avatarEl) avatarEl.innerText = p.initials;
-    if (nameEl) nameEl.innerText = p.name;
-    if (roleEl) roleEl.innerText = p.role;
-    if (ahtEl) ahtEl.innerHTML = `${p.aht} <span class="status-pill ${p.ahtStatus}"></span>`;
-    if (qaEl) qaEl.innerHTML = `${p.qa} <span class="status-pill ${p.qaStatus}"></span>`;
-    if (snpsEl) snpsEl.innerHTML = `${p.snps} <span class="status-pill ${p.snpsStatus}"></span>`;
-    if (adhEl) adhEl.innerHTML = `${p.adh} <span class="status-pill ${p.adhStatus}"></span>`;
-    if (trendEl) trendEl.innerText = p.trend;
+    Object.entries(elements).forEach(([id, text]) => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = text;
+    });
+
+    const metrics = {
+      previewAht: `${p.aht} <span class="status-pill ${p.ahtStatus}"></span>`,
+      previewQa: `${p.qa} <span class="status-pill ${p.qaStatus}"></span>`,
+      previewSnps: `${p.snps} <span class="status-pill ${p.snpsStatus}"></span>`,
+      previewAdh: `${p.adh} <span class="status-pill ${p.adhStatus}"></span>`
+    };
+
+    Object.entries(metrics).forEach(([id, html]) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    });
 
     p.bars.forEach((height, i) => {
       const bar = document.getElementById(`bar${i + 1}`);
@@ -357,15 +129,16 @@ function rotatePreviewProfile() {
     });
 
     previewBox.classList.remove('fade-preview');
-  }, 300);
+  }, 220);
 }
 
 // ==========================================================================
-// 5. INICIALIZACIÓN GLOBAL
+// 3. INICIALIZACIÓN GLOBAL
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   window.setLanguage(currentLang);
   
+  // Cerrar menú de idiomas al hacer clic fuera
   document.addEventListener('click', (e) => {
     const langMenu = document.getElementById('langMenu');
     const langBtn = document.getElementById('langTriggerBtn');
@@ -374,14 +147,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Cerrar modal al hacer clic en el fondo oscuro
   const modal = document.getElementById('authModal');
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) window.closeModal();
+      if (e.target === modal && typeof window.closeModal === 'function') {
+        window.closeModal();
+      }
     });
   }
 
-  // Recoger el email de la URL si se encuentra en success.html
+  // Soporte de teclado: cerrar menús y modales con la tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const langMenu = document.getElementById('langMenu');
+      if (langMenu) langMenu.classList.remove('active');
+      
+      if (modal && modal.classList.contains('active') && typeof window.closeModal === 'function') {
+        window.closeModal();
+      }
+    }
+  });
+
+  // Mostrar email dinámicamente en success.html
   const urlParams = new URLSearchParams(window.location.search);
   const userEmail = urlParams.get('email');
   if (userEmail) {
@@ -391,5 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setInterval(rotatePreviewProfile, 4500);
+  // Iniciar rotación de perfiles solo si existe la vista previa en la página actual
+  if (document.querySelector('.hero-preview')) {
+    setInterval(rotatePreviewProfile, 4500);
+  }
 });
