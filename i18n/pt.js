@@ -47,7 +47,7 @@ window.i18n.pt = {
   btn_team: "Iniciar Teste Gratuito",
   plan_business_title: "Empresarial",
   plan_business_desc: "Para gerentes de operações executando múltiplos esquadrões e campanhas.",
-  plan_business_f1: "✓ Até 300 Assentos de Usuário (10 Esquadrões Flexíveis)",
+  plan_business_f1: "✓ Até 300 Assentos de Usuário (2-10 Esquadrões Flexíveis)",
   plan_business_f2: "✓ Governança e Papéis Multi-Nível",
   plan_business_f3: "✓ Relatórios Comparativos Cruzados",
   plan_business_f4: "✓ Webhooks Dinâmicos de Entrada",

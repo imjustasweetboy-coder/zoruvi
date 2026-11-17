@@ -47,7 +47,7 @@ window.i18n.es = {
   btn_team: "Iniciar Prueba Gratuita",
   plan_business_title: "Negocio",
   plan_business_desc: "Para gerentes de operaciones que ejecutan múltiples escuadrones y campañas.",
-  plan_business_f1: "✓ Hasta 300 Asientos de Usuario (10 Escuadrones Flexibles)",
+  plan_business_f1: "✓ Hasta 300 Asientos de Usuario (2-10 Escuadrones Flexibles)",
   plan_business_f2: "✓ Gobernanza y Roles Multi-Nivel",
   plan_business_f3: "✓ Reportes Comparativos Cruzados",
   plan_business_f4: "✓ Webhooks Dinámicos de Entrada",

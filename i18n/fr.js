@@ -47,7 +47,7 @@ window.i18n.fr = {
   btn_team: "Essai Gratuit",
   plan_business_title: "Entreprise",
   plan_business_desc: "Pour les responsables des opérations gérant plusieurs escouades et campagnes.",
-  plan_business_f1: "✓ Jusqu'à 300 Sièges Utilisateurs (10 Escouades Flexibles)",
+  plan_business_f1: "✓ Jusqu'à 300 Sièges Utilisateurs (2-10 Escouades Flexibles)",
   plan_business_f2: "✓ Gouvernance et Rôles Multi-Niveaux",
   plan_business_f3: "✓ Rapports Comparatifs Inter-Escouades",
   plan_business_f4: "✓ Webhooks Entrants Dynamiques",

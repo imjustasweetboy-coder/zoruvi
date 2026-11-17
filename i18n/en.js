@@ -47,7 +47,7 @@ window.i18n.en = {
   btn_team: "Start Free Trial",
   plan_business_title: "Business",
   plan_business_desc: "For operations managers running multiple squads & campaigns.",
-  plan_business_f1: "✓ Up to 300 User Seats (10 Flexible Squads)",
+  plan_business_f1: "✓ Up to 300 User Seats (2-10 Flexible Squads)",
   plan_business_f2: "✓ Multi-Level Governance & Roles",
   plan_business_f3: "✓ Cross-Squad Comparative Reports",
   plan_business_f4: "✓ Dynamic Inbound Webhooks",
