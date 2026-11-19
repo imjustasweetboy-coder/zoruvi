@@ -41,3 +41,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// ==========================================================================
+// ENVÍO DE FORMULARIO DE CONTACTO (info@menosruido.store)
+// ==========================================================================
+window.handleContactSubmit = function(event) {
+  event.preventDefault();
+  const statusEl = document.getElementById('contactStatus');
+
+  const name = document.getElementById('contactName')?.value.trim() || '';
+  const email = document.getElementById('contactEmail')?.value.trim() || '';
+  const reason = document.getElementById('contactReason')?.value.trim() || '';
+  const message = document.getElementById('contactMessage')?.value.trim() || '';
+
+  if (!name || !email || !reason || !message) {
+    if (statusEl) statusEl.textContent = 'Please complete all required fields before sending.';
+    return;
+  }
+
+  const subject = `[ZORUVI / MENOS RUIDO] ${reason} - ${name}`;
+  const body = `Brand: ZORUVI (a brand by MENOS RUIDO)\nName: ${name}\nEmail: ${email}\nReason: ${reason}\n\n${message}`;
+
+  window.location.href = `mailto:info@menosruido.store?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  if (statusEl) {
+    statusEl.textContent = 'Opening your email client to send your message to info@menosruido.store.';
+  }
+};

@@ -242,3 +242,151 @@ footer {
   font-size: 0.9rem;
   background-color: var(--color-card-bg);
 }
+
+/* ==========================================================================
+   FORMULARIO DE CONTACTO (contact.html)
+   ========================================================================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.15rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-field label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-fox-dark);
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  background-color: var(--color-bg-body);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--color-fox-primary);
+  background-color: var(--color-card-bg);
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.contact-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: var(--color-fox-primary);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform 0.08s ease-out;
+}
+
+.contact-btn-primary:hover {
+  background-color: var(--color-fox-hover);
+}
+
+.contact-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.contact-status {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  text-align: right;
+  min-height: 1.25rem;
+}
+
+/* Ajuste responsivo para footer en páginas legales */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1.75rem 1.5rem;
+  background-color: var(--color-card-bg);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-copy {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.footer-links a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--color-fox-primary);
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: var(--color-border);
+  font-size: 0.75rem;
+}

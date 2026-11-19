@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZORUVI | Contact Us</title>
+  <meta name="description" content="Get in touch with ZORUVI, a brand operated by MENOS RUIDO." />
+
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="legal.css">
+
+  <!-- Assets & Scripts de Lógica -->
+  <script src="../assets/icons.js" defer></script>
+  <script src="legal.js" defer></script>
+</head>
+<body class="legal-body">
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../" class="brand-logo">
+        <svg class="icon"><use href="#icon-logo"></use></svg>
+        ZORUVI
+      </a>
+
+      <!-- SELECTOR DE IDIOMA -->
+      <div class="lang-dropdown-container">
+        <button class="lang-trigger-btn" id="langTriggerBtn" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <svg class="icon"><use href="#icon-globe"></use></svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" id="opt-en" onclick="setLanguage('en')">English</button>
+          <button class="lang-option" id="opt-es" onclick="setLanguage('es')">Español</button>
+          <button class="lang-option" id="opt-pt" onclick="setLanguage('pt')">Português</button>
+          <button class="lang-option" id="opt-fr" onclick="setLanguage('fr')">Français</button>
+          <button class="lang-option" id="opt-hi" onclick="setLanguage('hi')">हिन्दी</button>
+          <button class="lang-option" id="opt-pa" onclick="setLanguage('pa')">ਪੰਜਾਬੀ</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="legal-main">
+    <article class="legal-card">
+      <div class="legal-header">
+        <h1>Contact Us</h1>
+      </div>
+
+      <div class="legal-content">
+        <section>
+          <p>
+            Have a question about enterprise access, invitation keys, data privacy, or partnership opportunities? Fill out the form below to send your inquiry directly to <strong>info@menosruido.store</strong>.
+          </p>
+        </section>
+
+        <form id="contactForm" class="contact-form" onsubmit="handleContactSubmit(event)">
+          <div class="contact-row">
+            <div class="contact-field">
+              <label for="contactName">Full Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Your name" required />
+            </div>
+
+            <div class="contact-field">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" name="email" placeholder="you@company.com" required />
+            </div>
+          </div>
+
+          <div class="contact-field">
+            <label for="contactReason">Reason for Contact</label>
+            <select id="contactReason" name="reason" required>
+              <option value="" disabled selected>Select a reason...</option>
+              <option value="Enterprise & Invitation Access">Enterprise &amp; Invitation Access</option>
+              <option value="Security & Zero-Data Compliance">Security &amp; Zero-Data Compliance</option>
+              <option value="Billing & Plans">Billing &amp; Plans</option>
+              <option value="Technical Support">Technical Support</option>
+              <option value="General Inquiry">General Inquiry</option>
+            </select>
+          </div>
+
+          <div class="contact-field">
+            <label for="contactMessage">Details</label>
+            <textarea id="contactMessage" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+
+          <div class="contact-actions">
+            <button type="submit" class="contact-btn-primary">Send Message</button>
+          </div>
+
+          <p class="contact-status" id="contactStatus" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="legal-footer-nav">
+        <a href="../">Back to ZORUVI</a>
+      </div>
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 ZORUVI.</p>
+      <div class="footer-links">
+        <a href="terms">Terms of Service</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="privacy">Privacy Policy</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="contact">Contact Us</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="./">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
