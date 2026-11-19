@@ -703,6 +703,7 @@ footer {
 /* ==========================================================================
    ESTILOS DEL FOOTER MODULAR
    ========================================================================== */
+/* Ajuste responsivo para footer en páginas legales */
 .site-footer {
   border-top: 1px solid var(--color-border);
   padding: 1.75rem 1.5rem;
@@ -744,7 +745,7 @@ footer {
   color: var(--color-text-muted);
   text-decoration: none;
   font-weight: 400;
-  transition: color var(--transition-fast, 0.2s ease);
+  transition: color var(--transition-fast);
 }
 
 .footer-links a:hover {

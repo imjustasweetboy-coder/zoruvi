@@ -37,7 +37,7 @@
   <!-- BARRA DE NAVEGACIÓN -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="brand-logo">
+      <a href="../" class="brand-logo">
         <svg class="icon"><use href="#icon-logo"></use></svg>
         ZORUVI
       </a>
@@ -128,7 +128,7 @@
           <label class="checkbox-label">
             <input type="checkbox" id="regTerms" required>
             <span data-i18n="lbl_terms_agree">
-              I agree to the <a href="../legal/terms.html" target="_blank">Terms of Service</a> and <a href="../legal/privacy.html" target="_blank">Privacy Policy</a>.
+              I agree to the <a href="../legal/terms" target="_blank">Terms of Service</a> and <a href="../legal/privacy" target="_blank">Privacy Policy</a>.
             </span>
           </label>
           <span class="field-error-msg" id="termsErrorMsg"></span>
@@ -139,13 +139,25 @@
 
       <div class="auth-footer-link">
         <span data-i18n="lbl_have_account">Already have an account?</span> 
-        <a href="../index.html" data-i18n="tab_login">Log In</a>
+        <a href="../" data-i18n="tab_login">Log In</a>
       </div>
     </div>
   </main>
 
-  <footer>
-    <p data-i18n="footer_text">&copy; 2026 ZORUVI.</p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 ZORUVI.</p>
+      <div class="footer-links">
+        <a href="terms">Terms of Service</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="privacy">Privacy Policy</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="contact">Contact Us</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="../">Dashboard</a>
+      </div>
+    </div>
   </footer>
 
 </body>
