@@ -123,6 +123,17 @@
           <div class="custom-options-container" id="countryOptionsContainer"></div>
         </div>
 
+      <!-- CHECKBOX DE TÉRMINOS Y POLÍTICA DE PRIVACIDAD -->
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="regTerms" required>
+            <span data-i18n="lbl_terms_agree">
+              I agree to the <a href="../legal/terms.html" target="_blank">Terms of Service</a> and <a href="../legal/privacy.html" target="_blank">Privacy Policy</a>.
+            </span>
+          </label>
+          <span class="field-error-msg" id="termsErrorMsg"></span>
+        </div>        
+
         <button type="submit" class="btn btn-primary" id="registerSubmitBtn" data-i18n="tab_register">Create Account</button>
       </form>
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZORUVI | Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for ZORUVI - Operations Career Excellence Platform. Zero cookies, privacy-first architecture." />
+  
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS Específicos para Páginas Legales -->
+  <link rel="stylesheet" href="legal.css">
+
+  <!-- Diccionarios i18n -->
+  <script src="i18n/en.js"></script>
+  <script src="i18n/es.js"></script>
+  <script src="i18n/pt.js"></script>
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/hi.js"></script>
+  <script src="i18n/pa.js"></script>
+
+  <!-- Assets Globales y Lógica -->
+  <script src="../assets/icons.js" defer></script>
+  <script src="legal.js" defer></script>
+</head>
+<body class="legal-body">
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo">
+        <svg class="icon"><use href="#icon-logo"></use></svg>
+        ZORUVI
+      </a>
+      <div class="nav-actions">
+        <!-- SELECTOR DE IDIOMA -->
+        <div class="lang-dropdown-container">
+          <button class="lang-trigger-btn" id="langTriggerBtn" onclick="toggleLangMenu(event)" aria-label="Select language">
+            <svg class="icon"><use href="#icon-globe"></use></svg>
+          </button>
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-option" id="opt-en" onclick="setLanguage('en')">English</button>
+            <button class="lang-option" id="opt-es" onclick="setLanguage('es')">Español</button>
+            <button class="lang-option" id="opt-pt" onclick="setLanguage('pt')">Português</button>
+            <button class="lang-option" id="opt-fr" onclick="setLanguage('fr')">Français</button>
+            <button class="lang-option" id="opt-hi" onclick="setLanguage('hi')">हिन्दी</button>
+            <button class="lang-option" id="opt-pa" onclick="setLanguage('pa')">ਪੰਜਾਬੀ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL LEGAL -->
+  <main class="legal-main">
+    <div class="legal-card">
+      <div class="legal-header">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: November 2026</p>
+      </div>
+
+      <div class="legal-content">
+        <section>
+          <h2>1. Our Commitment to Privacy</h2>
+          <p>At ZORUVI, we believe in a lean, respectful, and privacy-first web architecture. We strictly avoid invasive tracking cookies, third-party advertising scripts, and unnecessary data collection. Your data belongs to you and your organization.</p>
+        </section>
+
+        <section>
+          <h2>2. Information We Collect</h2>
+          <p>To provide our operational performance and career management service, we collect only the essential information required to operate your account:</p>
+          <p>• <strong>Account Details:</strong> Email address, unique username, and country of operation provided during registration.<br>
+          • <strong>Operational Metrics:</strong> Performance data (such as AHT, QA scores, adherence, and SNPS) securely stored and isolated via database-level Row Level Security (RLS).</p>
+        </section>
+
+        <section>
+          <h2>3. Cookies and Analytics</h2>
+          <p>We <strong>do not</strong> use commercial tracking cookies, user profiling beacons, or intrusive marketing trackers. For high-level, anonymous traffic insights, we utilize <strong>GoatCounter</strong>—an open-source, privacy-focused analytics tool that does not store personal data, track users across websites, or use cookies.</p>
+        </section>
+
+        <section>
+          <h2>4. How We Use Your Information</h2>
+          <p>The collected data is used exclusively to:<br>
+          • Authenticate your user session and maintain security.<br>
+          • Provide real-time visualization of your operational performance metrics.<br>
+          • Manage workspace permissions and squad governance.</p>
+        </section>
+
+        <section>
+          <h2>5. Data Security & Storage</h2>
+          <p>Your data is hosted securely using industry-standard infrastructure (Supabase). We employ robust data isolation practices, ensuring that your operational metrics remain accessible solely to you and authorized members within your enterprise hierarchy.</p>
+        </section>
+
+        <section>
+          <h2>6. Your Rights & Data Deletion</h2>
+          <p>You maintain full control over your personal information. You have the right to access, correct, or request complete deletion of your account and associated profile data at any time by contacting our support channels.</p>
+        </section>
+
+        <section>
+          <h2>7. Contact Us</h2>
+          <p>If you have any questions regarding this Privacy Policy or our privacy practices, you can reach out through our official platform channels.</p>
+        </section>
+      </div>
+
+      <div class="legal-footer-nav">
+        <a href="../index.html">&larr; Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 ZORUVI.</p>
+  </footer>
+
+</body>
+</html>

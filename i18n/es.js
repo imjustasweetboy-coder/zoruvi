@@ -26,7 +26,7 @@ window.i18n.es = {
   b5_text: "Licenciamiento dinámico y seguimiento de asientos activos alineados al crecimiento de tu equipo.",
   b6_title: "Gobernanza de Datos",
   b6_text: "Gestión segura de sesiones diferenciando roles de usuarios operativos.",
-  pricing_title: "Elige <span>Tu</span> Plan",
+  pricing_title: "Elige Tu <span>Plan</span>.",
   pricing_sub: "Sin cargos sorpresa. Paga conforme tus equipos crecen.",
   plan_agent_title: "Agente",
   plan_agent_desc: "Para agentes individuales que impulsan su rendimiento personal.",

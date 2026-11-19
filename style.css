@@ -699,3 +699,60 @@ footer {
     overflow: hidden;
   }
 }
+
+/* ==========================================================================
+   ESTILOS DEL FOOTER MODULAR
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1.75rem 1.5rem;
+  background-color: var(--color-card-bg);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-copy {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.footer-links a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color var(--transition-fast, 0.2s ease);
+}
+
+.footer-links a:hover {
+  color: var(--color-fox-primary);
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: var(--color-border);
+  font-size: 0.75rem;
+}

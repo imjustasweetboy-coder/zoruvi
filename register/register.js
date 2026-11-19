@@ -249,12 +249,19 @@ window.handleRegister = async function(event) {
     return;
   }
 
+  const termsCheckbox = document.getElementById('regTerms');
   const username = document.getElementById('regUsername').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
   const confirmPassword = document.getElementById('regConfirmPassword').value;
   const countryInput = document.getElementById('regCountry').value.trim();
   const submitBtn = document.getElementById('registerSubmitBtn');
+
+  // Validar que se hayan aceptado los términos y condiciones
+  if (termsCheckbox && !termsCheckbox.checked) {
+    setRegFieldError(termsCheckbox, "You must agree to the Terms and Privacy Policy.");
+    return;
+  }
 
   // Validar país permitido (Anticonejolandias)
   if (!countryList.includes(countryInput)) {

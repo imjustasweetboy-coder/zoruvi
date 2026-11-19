@@ -26,7 +26,7 @@ window.i18n.en = {
   b5_text: "Dynamic licensing and active seat tracking tightly aligned to your team's growth.",
   b6_title: "Data Governance",
   b6_text: "Secure session management differentiating operational user roles.",
-  pricing_title: "Choose <span>Your</span> Plan",
+  pricing_title: "Choose Your <span>Plan</span>.",
   pricing_sub: "No surprise fees. Pay as your teams grow.",
   plan_agent_title: "Agent",
   plan_agent_desc: "For individual agents driving their personal performance.",

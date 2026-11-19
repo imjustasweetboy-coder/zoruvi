@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZORUVI | sNPS Calculator</title>
+  <meta name="description" content="Calculate your real-time sNPS and CSAT score and see how many consecutive positive surveys you need to hit your target." />
+  
+  <!-- FAVICON SVG OPTIMIZADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpolygon points='120,20 20,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='380,20 480,210 250,210' fill='%23FF7043'/%3E%3Cpolygon points='20,210 480,210 250,480' fill='%23E0562D'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="tools.css">
+
+  <!-- Diccionarios i18n -->
+  <script src="../i18n/en.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/pt.js"></script>
+  <script src="../i18n/fr.js"></script>
+  <script src="../i18n/hi.js"></script>
+  <script src="../i18n/pa.js"></script>
+
+  <!-- Assets & Scripts de Lógica -->
+  <script src="../assets/icons.js" defer></script>
+  <script src="tools.js" defer></script>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo">
+        <svg class="icon"><use href="#icon-logo"></use></svg>
+        ZORUVI
+      </a>
+      <div class="nav-actions">
+
+        <!-- SELECTOR DE IDIOMA -->
+        <div class="lang-dropdown-container">
+          <button class="lang-trigger-btn" id="langTriggerBtn" onclick="toggleLangMenu(event)" aria-label="Select language">
+            <svg class="icon"><use href="#icon-globe"></use></svg>
+          </button>
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-option" id="opt-en" onclick="setLanguage('en')">English</button>
+            <button class="lang-option" id="opt-es" onclick="setLanguage('es')">Español</button>
+            <button class="lang-option" id="opt-pt" onclick="setLanguage('pt')">Português</button>
+            <button class="lang-option" id="opt-fr" onclick="setLanguage('fr')">Français</button>
+            <button class="lang-option" id="opt-hi" onclick="setLanguage('hi')">हिन्दी</button>
+            <button class="lang-option" id="opt-pa" onclick="setLanguage('pa')">ਪੰਜਾਬੀ</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL CALCULADORA -->
+  <main class="calc-hub">
+    <div class="calc-header">
+      <h1 class="calc-title">sNPS <span>Calculator</span></h1>
+      <p class="calc-subtitle">
+        Instant metric calculation and target projection.
+      </p>
+    </div>
+
+    <div class="calc-card">
+      
+      <!-- MODO sNPS -->
+      <div id="panelSnps">
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label for="snpsProm">Promoters</label>
+            <input type="number" id="snpsProm" min="0" placeholder="e.g. 35" oninput="calculateSNPS()">
+          </div>
+
+          <div class="calc-field">
+            <label for="snpsPass">Passives</label>
+            <input type="number" id="snpsPass" min="0" placeholder="e.g. 10" oninput="calculateSNPS()">
+          </div>
+
+          <div class="calc-field">
+            <label for="snpsDet">Detractors</label>
+            <input type="number" id="snpsDet" min="0" placeholder="e.g. 5" oninput="calculateSNPS()">
+          </div>
+
+          <div class="calc-field">
+            <label for="snpsGoal">Target sNPS</label>
+            <input type="number" id="snpsGoal" min="-100" max="100" step="1" value="60" oninput="calculateSNPS()">
+          </div>
+        </div>
+      </div>
+
+      <!-- CAJA DE RESULTADOS -->
+      <div class="calc-results">
+        <div class="res-main">
+          <span class="res-label" id="resLabel">Current sNPS</span>
+          <span class="res-number" id="resScore">0.00</span>
+          <span class="res-sub" id="resCount">Total: 0 surveys</span>
+        </div>
+
+        <div class="res-divider"></div>
+
+        <div class="res-proj">
+          <span class="res-label">Target Projection</span>
+          <p class="res-message" id="resMessage">Enter your survey counts above to see how many consecutive positive surveys you need.</p>
+        </div>
+      </div>
+
+      <div class="calc-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">Go Back</a>
+        <button type="button" class="btn btn-primary btn-sm" onclick="resetCalculator()">Reset Values</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER MODULAR -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 ZORUVI.</p>
+      <div class="footer-links">
+        <a href="../legal/terms">Terms of Service</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="../legal/privacy">Privacy Policy</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="../legal/contact">Contact Us</a>
+        <span class="footer-separator">&bull;</span>
+        <a href="tools/index.html">Tools</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -26,7 +26,7 @@ window.i18n.fr = {
   b5_text: "Licences dynamiques et suivi des sièges actifs alignés sur la croissance de votre équipe.",
   b6_title: "Gouvernance des Données",
   b6_text: "Gestion sécurisée des sessions distinguant les rôles des utilisateurs opérationnels.",
-  pricing_title: "Choisissez <span>Votre</span> Plan",
+  pricing_title: "Choisissez Votre <span>Plan</span>.",
   pricing_sub: "Pas de frais cachés. Payez au fur et à mesure que vos équipes grandissent.",
   plan_agent_title: "Agent",
   plan_agent_desc: "Pour les agents individuels stimulant leur performance personnelle.",
